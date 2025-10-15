@@ -7,6 +7,7 @@ import json
 dotenv.load_dotenv()
 app = Flask(__name__,template_folder="./templates")
 app.secret_key = os.getenv("COOKIES_SECRET_KEY")   
+Cuentas = os.path.join(os.path.dirname(__file__), 'accounts.json')
 
 @app.route("/",methods = ['GET','POST'])
 def index():
@@ -49,6 +50,36 @@ def favicon():
     return send_from_directory(
         app.static_folder, 'favicon.ico', mimetype='image/vnd.microsoft.icon'
     )
+
+@app.route("/createAccount", methods=["GET", "POST"])
+def create_account():
+    try:
+        if not session.get('logged_in'):
+            return redirect("/")
+
+        if request.method == "POST":
+            currency = request.form["currency"].upper().strip()
+            balance = float(request.form["balance"])
+
+            with open(Cuentas, "r") as f:
+                accounts = json.load(f)
+
+            if currency in accounts:
+                return render_template("createAccount.html", error="Esa cuenta ya existe.")
+
+            accounts[currency] = balance
+
+            with open(Cuentas, "w") as f:
+                json.dump(accounts, f, indent=4)
+
+            return redirect("/welcome")
+
+        return render_template("createAccount.html")
+
+    except KeyError:
+        return redirect("/")
+
+
 if __name__ == '__main__':
     app.run(debug=True,host='localhost',port = 8000)
 
