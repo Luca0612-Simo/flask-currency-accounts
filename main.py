@@ -29,12 +29,14 @@ def index():
 
 @app.route("/welcome",methods = ['GET'])
 def welcome():
+    with open("textsEsp.json", "r") as f:
+            text = json.loads(f.read())
     try:
         if session['logged_in'] == True:
             welcomeText =  session['user']
             with open("accounts.json", "r") as f:
                 accounts = json.loads(f.read())
-            return render_template("welcome.html",welcomeText=welcomeText, accounts=accounts)
+            return render_template("welcome.html",welcomeText=welcomeText, accounts=accounts, text=text)
         else:
             return redirect("/")
     except KeyError:
@@ -53,6 +55,8 @@ def favicon():
 
 @app.route("/createAccount", methods=["GET", "POST"])
 def create_account():
+    with open("textsEsp.json", "r") as f:
+        text = json.loads(f.read())
     try:
         if not session.get('logged_in'):
             return redirect("/")
@@ -65,7 +69,7 @@ def create_account():
                 accounts = json.load(f)
 
             if currency in accounts:
-                return render_template("createAccount.html", error="Esa cuenta ya existe.")
+                return render_template("createAccount.html", error="Esa cuenta ya existe.", text=text)
 
             accounts[currency] = balance
 
@@ -74,7 +78,7 @@ def create_account():
 
             return redirect("/welcome")
 
-        return render_template("createAccount.html")
+        return render_template("createAccount.html", text=text)
 
     except KeyError:
         return redirect("/")
