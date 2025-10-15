@@ -5,5 +5,11 @@
     "pwd": "Password",
     "pwdph": "Enter your password",
     "login": "Login",
-    "WrongCredentials": "Wrong credentials"
+    "WrongCredentials": "Wrong credentials",
+    "createAccount": "Create new account",
+    "createAccountTitle": "Create new account",
+    "example":"Current code (example: GBP, BRL, etc):",
+    "putInitialBalance": "Initial Balance:",
+    "confirm": "Confirm",
+    "backToWelcome": "Back"
 }

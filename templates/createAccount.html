@@ -6,23 +6,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Crear nueva cuenta</h1>
+    <div class="login-container">
 
-    {% if error %}
-    <p style="color: red; font-weight: bold;">{{ error }}</p>
-    {% endif %}
+        <h1>{{ text["createAccountTitle"] }}</h1>
 
-    <form action="{{ url_for('create_account') }}" method="post">
-        <label for="currency">Código de moneda (ej: GBP, BRL, etc):</label><br>
-        <input type="text" id="currency" name="currency" required><br><br>
+        {% if error %}
+            <p style="color: red; font-weight: bold;">{{ error }}</p>
+        {% endif %}
 
-        <label for="balance">Saldo inicial:</label><br>
-        <input type="number" id="balance" name="balance" step="0.01" value="0.00" required><br><br>
+        <form action="{{ url_for('create_account') }}" method="post">
+            <label for="currency">{{ text["example"] }}</label><br>
+            <input type="text" id="currency" name="currency" required><br><br>
 
-        <button type="submit">Guardar</button>
-    </form>
+            <label for="balance">{{ text["putInitialBalance"] }}</label><br>
+            <input type="number" id="balance" name="balance" step="0.01" value="0.00" required><br><br>
 
-    <br>
-    <a href="{{ url_for('welcome') }}">Volver</a>
+            <button type="submit">{{ text["confirm"] }}</button>
+        </form>
+
+        <br>
+        <form action="{{ url_for('welcome') }}" method="get">
+            <button type="submit">{{ text["backToWelcome"] }}</button>
+        </form>
+    </div>
+    
 </body>
 </html>
