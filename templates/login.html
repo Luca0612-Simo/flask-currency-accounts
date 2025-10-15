@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CurrencyTradingWeb</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="login-container">
+    <h1>{{ text["appTitle"] }}</h1>
+    {%if error %}
+    <div class="login-error" >
+      <h2>{{ text["WrongCredentials"] }}</h2>
+    </div>
+    {% endif %}
+
+  <form method="post">
+      <div class="form-group">
+        <label for="username">{{ text["user"] }}</label>
+        <input type="text" id="username" name="username" placeholder="{{ text["userph"] }}">
+      </div>
+
+      <div class="form-group">
+        <label for="password">{{ text["pwd"] }}</label>
+        <input type="password" id="password" name="password" placeholder="{{ text["pwdph"] }}">
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="{{ text["login"] }}">
+      </div>
+    </form>
+  </div>
+</body>
+</html>
