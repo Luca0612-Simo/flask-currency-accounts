@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CurrencyTradingWeb</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="login-container">
+    {% if welcomeText  %}
+    <h1>Bienvenido a la aplicacion {{ welcomeText  }}</h1> 
+    {% else %}
+    <h1>Bienvenido a la aplicacion</h1>
+    {% endif %}
+  
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Moneda</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for currency in accounts.keys() %}
+          <tr>
+            <td>{{ currency }}</td>
+            <td class={% if accounts[currency] <= 0  %}negativo{% else %}positivo{% endif %}>
+              {{ accounts[currency] | round(2)}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <form action="{{ url_for('create_account') }}" method="get">
+      <button type="submit">{{ text["createAccount"] }}</button>
+    </form>
+    
+  </div>
+
+
+
+</body>
+</html>

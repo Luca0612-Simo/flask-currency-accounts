@@ -1,2 +1,7 @@
 # flask-currency-accounts
-Project in Flask that manages monetary accounts stored in a JSON file, allowing them to be viewed and new accounts added from a web interface.
+To use this project, you need to:
+1. Open a terminal
+2. Create a venv (python -m venv venv)
+3. Activate the venv (venv\Scripts\activate)
+4. Install the dependencies with pip install -r .\requirements.txt
+5. Run a python main.py
